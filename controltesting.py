@@ -18,6 +18,11 @@ highLowPass = []
 rectified = []
 boxCar = []
 
+startTime = 0
+threshold_mV = 0.15
+threshold_us = 700000
+
+
 ################################################################################
 print "Please input name of data file: "
 myFile = raw_input()
@@ -36,6 +41,14 @@ while myLine:
         highLowPass.append(float(myLine[4]))
         rectified.append(float(myLine[5]))
         boxCar.append(float(myLine[6]))
+		
+		#Rotating a tetris block by flexing
+		if((startTime == 0) || ((microSec.index(len(microSec)) - startTime) >= threshold_us)):
+			if(boxCar.index(len(boxCar)-1) >= threshold):
+				startTime = microSec.index(len(microSec)-1)
+				
+				#register rotation button here
+
 
 ################################################################################
 plt.figure(1)
